@@ -1,4 +1,5 @@
 require_relative("../db/sqlrunner")
+require("pry")
 
 class House
 
@@ -32,3 +33,6 @@ class House
   end
 
 end
+
+# binding.pry
+# nil
