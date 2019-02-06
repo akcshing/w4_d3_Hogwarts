@@ -13,6 +13,7 @@ get "/hogwarts-students" do
 end
 
 get "/hogwarts-students/new" do
+  @houses = House.all()
   erb(:new)
 end
 
