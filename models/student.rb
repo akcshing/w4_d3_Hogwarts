@@ -3,14 +3,14 @@ require_relative('../db/sqlrunner')
 
 class Student
 
-attr_accessor :first_name, :last_name, :house, :age
+attr_accessor :first_name, :last_name, :house_id, :age
 attr_reader :id
 
 def initialize(students)
   @id = students['id'].to_i if students['id']
   @first_name = students['first_name']
   @last_name = students['last_name']
-  @house = students['house']
+  @house_id = students['house_id'].to_i
   @age = students['age'].to_i
 end
 
@@ -19,8 +19,8 @@ end
   end
 
   def save()
-    sql = "INSERT INTO students (first_name, last_name, house, age) VALUES ($1, $2, $3, $4) RETURNING id"
-    values = [@first_name, @last_name, @house, @age]
+    sql = "INSERT INTO students (first_name, last_name, house_id, age) VALUES ($1, $2, $3, $4) RETURNING *"
+    values = [@first_name, @last_name, @house_id, @age]
     student_data = SqlRunner.run(sql, values)
     @id = student_data.first()['id'].to_i
   end
