@@ -18,6 +18,14 @@ end
     return "#{@first_name} #{@last_name}"
   end
 
+  def house
+    sql = "SELECT * FROM houses WHERE houses.id = $1"
+    values = [@house_id]
+    house = SqlRunner.run(sql, values)
+    result = House.new(house.first)
+    return result
+  end
+
   def save()
     sql = "INSERT INTO students (first_name, last_name, house_id, age) VALUES ($1, $2, $3, $4) RETURNING *"
     values = [@first_name, @last_name, @house_id, @age]
